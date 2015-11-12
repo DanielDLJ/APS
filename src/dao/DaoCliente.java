@@ -15,4 +15,5 @@ public interface DaoCliente {
     public void adicionar(Cliente cliente);
     public void remover(Cliente cliente);
     public void listarTodosClientes();
+    public int verificaCliente(Cliente cliente);
 }

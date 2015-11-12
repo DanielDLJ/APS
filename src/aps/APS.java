@@ -5,6 +5,8 @@
  */
 package aps;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author UTFPR
@@ -16,6 +18,8 @@ public class APS {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        LocalDate agora = LocalDate.now();
+        System.out.println(agora);
     }
     
 }

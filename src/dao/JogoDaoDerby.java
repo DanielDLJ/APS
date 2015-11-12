@@ -45,11 +45,11 @@ public class JogoDaoDerby implements DaoJogo{
             dao.adicionar(console);
             aux=dao.verificaConsole(console);
         }
-        String instrucao = "INSERT INTO CONSOLE(NOME,FABRICANTE) VALUES (" 
+        String instrucao = "INSERT INTO JOGO(NOME,CONSOLEID, CATEGORIA,PRECOLOCACAO) VALUES (" 
                 +"'" + jogo.getNome()+ "',"
-                +"'" + jogo.getCategoria()+ "',"
-                +"'" + jogo.getPrecoLocacao()+"',"
-                +"'" + aux +")";
+                +"'" + aux+ "',"
+                +"'" + jogo.getCategoria()+"',"
+                +"'" + jogo.getPrecoLocacao()+")";
         System.out.println(instrucao);
         try{
             stmt.executeUpdate(instrucao);
@@ -72,22 +72,21 @@ public class JogoDaoDerby implements DaoJogo{
 
     @Override
     public void listarTodosJogos() {
-        String instrucao = "SELECT* FROM JOGO";
-        ArrayList<Console> consoles = new ArrayList<>();
-        String nome=" ",fabricante=" ";
+        String instrucao;
         try {
-            
+            instrucao = "SELECT* FROM JOGO";
             ResultSet rs = stmt.executeQuery(instrucao);
-            instrucao = "SELECT* FROM CONSOLE";
-            ResultSet rs2 = stmt.executeQuery(instrucao);
-            
+            int id;
             
             while(rs.next()){
+                id = rs.getInt("JOGOID");
+                DaoConsole dao = new ConsoleDaoDerby();
+                Console console = dao.getConsole(id);
                 System.out.println("    JOGO\nNome: " + rs.getString("NOME")
                         + "   Categoria: " + rs.getString("CATEGORIA")
                         + "   Preco Locacao: "+rs.getFloat("PRECO")
-                        + "   Console nome: "+nome
-                        + "   Console fabricante: "+fabricante);
+                        + "   Console nome: "+console.getNome()
+                        + "   Console fabricante: "+console.getFabricante());
             }
             
         } catch (SQLException se) {

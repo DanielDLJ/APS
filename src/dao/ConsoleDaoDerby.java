@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Objects;
 import modelo.Cliente;
 import modelo.Console;
@@ -96,6 +97,29 @@ public class ConsoleDaoDerby implements DaoConsole{
             System.out.println(se);
         }
         return -1;
+    }
+
+    @Override
+    public Console getConsole(int idConsole) {
+        
+        String instrucao = "SELECT* FROM CONSOLE";
+        Console console = new Console("nada","nada");
+        int cont=0;
+        try{
+            ResultSet rs = stmt.executeQuery(instrucao);
+            while(rs.next()){
+                int id = rs.getInt("CONSOLEID");
+                String nome = rs.getString("NOME");
+                String fabricante = rs.getString("FABRICANTE");
+                if(id==idConsole){
+                    console = new Console(nome,fabricante);
+                    break;
+                }
+            }
+        }catch(SQLException se){
+            System.out.println("Mensagem: "+se.getMessage());
+        }
+        return console;
     }
 
     

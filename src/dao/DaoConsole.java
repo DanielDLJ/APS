@@ -16,4 +16,5 @@ public interface DaoConsole {
     public void remover(Console console);
     public void listarTodosConsoles();
     public int verificaConsole(Console console);
+    public Console getConsole(int idConsole);
 }

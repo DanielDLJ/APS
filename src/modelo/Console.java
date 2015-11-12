@@ -12,13 +12,25 @@ package modelo;
 public class Console {
     private String nome;
     private String fabricante;
-
+    private int id;
+    public Console(){
+        
+    }
     public Console(String nome, String fabricante) {
         this.nome = nome;
         this.fabricante = fabricante;
     }
 
+    public Console(int id, String nome, String fabricante) {
+        this.nome = nome;
+        this.fabricante = fabricante;
+        this.id = id;
+    }
 
+    public int getId() {
+        return id;
+    }
+    
     public String getNome() {
         return nome;
     }
